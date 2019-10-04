@@ -1,0 +1,31 @@
+.pizza-list-item {
+  display: flex;
+  margin: 15px 0;
+}
+
+.pizza-list-item .pizza-cover {
+  flex-shrink: 0;
+  width: 140px;
+  margin-right: 30px;
+
+}
+
+.pizza-list-item .pizza-cover img {
+  max-width: 100%;
+}
+
+.pizza-list-item .pizza-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  align-items: flex-start;
+}
+
+.pizza-list-item .pizza-details .pizza-name {
+  font-size: 1.2rem;
+}
+
+.pizza-list-item .pizza-details .pizza-cooking-time {
+  font-size: 1.4rem;
+}

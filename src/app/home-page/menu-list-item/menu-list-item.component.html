@@ -1,0 +1,15 @@
+<li *ngFor="let itemList of pizzaMenu">
+  <div class="pizza-list-item">
+    <div class="pizza-cover">
+      <img src="http://localhost:3001/pizza-pictures/pizza-icon.png" alt="pizza-cover" width="120" height="120"/>
+    </div>
+    <div class="pizza-details">
+      <a class="pizza-name" href="#">{{itemList.pizza_name}}</a>
+      <div class="pizza-cooking-time">{{itemList.cooking_time}} seconds</div>
+      <button class="btn btn-info add-to-cart">Add to cart</button>
+    </div>
+  </div>
+</li>
+
+
+
