@@ -11,6 +11,8 @@ import {AppRoutingModule} from './app-routing.module';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
+import {StoreModule} from '@ngrx/store';
+import {pizzaMenuReducer} from './home-page/menu-list/store/menu-list.reducer';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { RegistrationPageComponent } from './registration-page/registration-page
   imports: [
     BrowserModule,
     HttpClientModule,
+    StoreModule.forRoot({pizzaMenu: pizzaMenuReducer}),
     AppRoutingModule
   ],
   providers: [],

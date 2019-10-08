@@ -11,22 +11,25 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>1</td>
-      <td>marinara</td>
-      <td>2</td>
-      <td>20 sec</td>
+    <tr *ngFor="let item of (cartItems | async).cartItems; let i = index">
+      <td>{{i + 1}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.count}}</td>
+      <td>{{item.totalCookingTime}}</td>
       <td>
         <button
-        class="btn btn-outline-danger btn-sm float-right">
+          (click)="onDelete(item.id)"
+          class="btn btn-outline-danger btn-sm float-right">
           <i class="fa fa-trash-o"></i>
         </button>
         <button
-        class="btn btn-outline-success btn-sm float-right">
+          (click)="onIncrease(item.id)"
+          class="btn btn-outline-success btn-sm float-right">
           <i class="fa fa-plus-circle"></i>
         </button>
         <button
-        class="btn btn-outline-warning btn-sm float-right">
+          (click)="onDecrease(item.id)"
+          class="btn btn-outline-warning btn-sm float-right">
           <i class="fa fa-minus-circle"></i>
         </button>
       </td>
@@ -36,6 +39,6 @@
 
   <div class="total">
     <button class="order-button">Make order</button>
-    <p>Total cooking time is 20 sec</p>
+    <p>Total cooking time is {{this.currentOrderTotal}} sec</p>
   </div>
 </div>
