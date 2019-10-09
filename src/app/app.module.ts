@@ -13,6 +13,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import {StoreModule} from '@ngrx/store';
 import {pizzaMenuReducer} from './home-page/menu-list/store/menu-list.reducer';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {LoadingSpinnerComponent} from './loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +25,15 @@ import {pizzaMenuReducer} from './home-page/menu-list/store/menu-list.reducer';
     CartTableComponent,
     LoginPageComponent,
     HomePageComponent,
+    LoadingSpinnerComponent,
     RegistrationPageComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     StoreModule.forRoot({pizzaMenu: pizzaMenuReducer}),
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [],

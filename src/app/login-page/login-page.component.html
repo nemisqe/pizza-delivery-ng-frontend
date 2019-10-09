@@ -1,8 +1,11 @@
-<form class="reg-page__form">
+<form #authForm="ngForm" class="reg-page__form" (ngSubmit)="onSubmit(authForm)">
   <h3>Login below</h3>
   <label class="reg-page__label">
     <p class="label-txt">ENTER YOUR NAME</p>
     <input type="text"
+           name="username"
+           required
+           ngModel
            class="input"/>
     <div class="line-box">
       <div class="line"></div>
@@ -11,10 +14,14 @@
   <label class="reg-page__label">
     <p class="label-txt">ENTER YOUR PASSWORD</p>
     <input type="password"
+           name="password"
+           minlength="3"
+           ngModel
+           required
            class="input"/>
     <div class="line-box">
       <div class="line"></div>
     </div>
   </label>
-  <button class="reg-page__button">submit</button>
+  <button class="reg-page__button" [disabled]="!authForm.valid">submit</button>
 </form>

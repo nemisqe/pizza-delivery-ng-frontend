@@ -1,4 +1,5 @@
-<li *ngFor="let item of pizzaMenu">
+<ng-container>
+  <li *ngFor="let item of pizzaMenu">
   <div class="pizza-list-item">
     <div class="pizza-cover">
       <img src="http://localhost:3001/pizza-pictures/pizza-icon.png" alt="pizza-cover" width="120" height="120"/>
@@ -11,4 +12,5 @@
         (click)="onAddedToCart(item.id)">Add to cart</button>
     </div>
   </div>
-</li>
+  </li>
+</ng-container>

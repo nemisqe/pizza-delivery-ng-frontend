@@ -1,8 +1,10 @@
 import * as pizzaMenuActions from './menu-list.actions';
+import {Action} from '@ngrx/store';
 
 const initialState = {
-  pizzaMenu: [{id: 1, pizza_name: 'aaa', cooking_time: 10}],
+  pizzaMenu: [],
   cartItems: [],
+  loading: false,
   orderTotal: 0
 };
 
@@ -70,7 +72,13 @@ export const pizzaMenuReducer = (state = initialState, action: pizzaMenuActions)
     case pizzaMenuActions.FETCH_MENU_SUCCESS:
       return {
         ...state,
-        pizzaMenu: action.payload
+        pizzaMenu: action.payload,
+        loading: false
+      };
+    case pizzaMenuActions.FETCH_MENU_REQUEST:
+      return {
+        ...state,
+        loading: true
       };
     case pizzaMenuActions.PIZZA_REMOVED_FROM_CART:
       return updateOrder(state, action.payload, -1);

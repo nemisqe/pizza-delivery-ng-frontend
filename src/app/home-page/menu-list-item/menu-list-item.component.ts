@@ -12,6 +12,7 @@ import * as pizzaActions from '../menu-list/store/menu-list.actions';
 export class MenuListItemComponent implements OnInit {
   cartItems: Observable<{cartItems: string[]}>;
   pizza: Observable<{pizzaMenu: string[]}>;
+  isLoading = false;
   pizzaMenu: string[];
   constructor(
     private http: HttpClient,
@@ -23,9 +24,11 @@ export class MenuListItemComponent implements OnInit {
     this.http.get<string[]>('http://localhost:3001/menu')
       .subscribe(res => {
         this.pizzaMenu = res;
+        this.store.dispatch(new pizzaActions.FetchDataRequest());
         this.store.dispatch(new pizzaActions.FetchMenuSuccess(res));
-      });
+      }, error => console.error(error));
     this.cartItems = this.store.select('pizzaMenu');
+    this.store.select('pizzaMenu').subscribe(load => this.isLoading = load.loading);
   }
   onAddedToCart(id) {
     this.store.dispatch(new pizzaActions.PizzaAddedToCart(id));

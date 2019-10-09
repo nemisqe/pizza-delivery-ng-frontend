@@ -1,8 +1,14 @@
-<form class="reg-page__form">
+<div *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<form #regForm="ngForm" (ngSubmit)="onSubmit(regForm)" class="reg-page__form" *ngIf="!isLoading">
   <h3>Registration below</h3>
   <label class="reg-page__label">
     <p class="label-txt">ENTER YOUR NAME</p>
     <input type="text"
+           ngModel
+           name="username"
+           required
            class="input"/>
     <div class="line-box">
       <div class="line"></div>
@@ -11,11 +17,14 @@
   <label class="reg-page__label">
     <p class="label-txt">ENTER YOUR PASSWORD</p>
     <input type="password"
+           minlength="2"
+           ngModel
+           name="password"
            class="input"/>
     <div class="line-box">
       <div class="line"></div>
     </div>
   </label>
-  <button class="reg-page__button">submit</button>
+  <button class="reg-page__button" [disabled]="!regForm.valid">submit</button>
 </form>
 
