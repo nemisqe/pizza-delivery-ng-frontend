@@ -9,8 +9,9 @@ import {RegistrationPageService} from './registration-page.service';
   providers: [RegistrationPageService]
 })
 
-export class RegistrationPageComponent implements OnInit {
+export class RegistrationPageComponent {
   isLoading = false;
+  hasError: string;
   constructor(private registrationService: RegistrationPageService) {}
   onSubmit(form: NgForm) {
     this.isLoading = true;
@@ -19,10 +20,13 @@ export class RegistrationPageComponent implements OnInit {
     const password = form.value.password;
     this.registrationService
       .registration(clientName, password)
-      .subscribe(res => { console.log(res); this.isLoading = false; }, error => { console.log(error); this.isLoading = false; });
+      .subscribe(res => { console.log(res); this.isLoading = false; }, error => {
+        if (error.status === 409) {
+          this.hasError = 'Username is already used';
+          this.isLoading = false;
+        } else {
+          this.hasError = 'Error. Please try again';
+          this.isLoading = false; }});
     form.reset();
-  }
-  ngOnInit() {
-    this.isLoading = false;
   }
 }

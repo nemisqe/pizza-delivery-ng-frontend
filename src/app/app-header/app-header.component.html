@@ -8,11 +8,18 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/">Home</a>
       </li>
-      <li routerLinkActive="active" class="nav-item">
-        <a class="nav-link" routerLink="/registration">Registration</a>
+      <li *ngIf="hideLoginSignUpLinks" routerLinkActive="active" class="nav-item">
+        <a class="nav-link" routerLink="/registration">Sign up</a>
       </li>
-      <li routerLinkActive="active" class="nav-item">
+      <li *ngIf="hideLoginSignUpLinks" routerLinkActive="active" class="nav-item">
         <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+      <li
+        *ngIf="logoutLink"
+        (click)="userLogout()"
+        routerLinkActive="active"
+        class="nav-item">
+        <a class="nav-link" routerLink="/logout">Log out</a>
       </li>
     </ul>
   </div>

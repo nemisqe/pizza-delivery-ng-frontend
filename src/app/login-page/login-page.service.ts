@@ -1,7 +1,20 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Store} from '@ngrx/store';
 
-@Injectable({providedIn: 'root'})
+interface LoginResData {
+  id: number;
+  clientName: string;
+  password: any;
+}
+
+@Injectable()
 
 export class LoginPageService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
+  login(clientName: string, password: any) {
+    return this.http.post<LoginResData>('http://localhost:3001/authentication/', {
+      clientName, password
+    });
+  }
 }

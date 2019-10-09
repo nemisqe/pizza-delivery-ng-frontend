@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'registration',
     component: RegistrationPageComponent
+  },
+  {
+    path: 'logout',
+    redirectTo: HomePageComponent
   }
 ];
 

@@ -1,11 +1,13 @@
 import * as pizzaMenuActions from './menu-list.actions';
-import {Action} from '@ngrx/store';
 
 const initialState = {
   pizzaMenu: [],
   cartItems: [],
   loading: false,
-  orderTotal: 0
+  orderTotal: 0,
+  error: null,
+  clientName: '',
+  isAuthenticated: false
 };
 
 const updateCartItems = (cartItems, item, idx) => {
@@ -30,6 +32,18 @@ const updateCartItems = (cartItems, item, idx) => {
     item,
     ...cartItems.slice(idx + 1)
   ];
+};
+
+const checkAuth = (state) => {
+  const item = window.localStorage.getItem('clientName');
+  if (item) {
+    return {
+      ...state,
+      clientName: item,
+      isAuthenticated: true
+    };
+  }
+  return state;
 };
 
 const updateOrder = (state, pizzaId, quantity) => {
@@ -79,6 +93,31 @@ export const pizzaMenuReducer = (state = initialState, action: pizzaMenuActions)
       return {
         ...state,
         loading: true
+      };
+    case pizzaMenuActions.FETCH_DATA_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
+    case pizzaMenuActions.USER_LOGOUT:
+      window.localStorage.removeItem('clientName');
+      window.localStorage.removeItem('token');
+      return {
+        ...state,
+        isAuthenticated: false,
+        loading: false
+      };
+    case pizzaMenuActions.CHECK_USER_FOR_AUTH:
+      return checkAuth(state);
+    case pizzaMenuActions.POST_LOGIN_SUCCESS:
+      window.localStorage.setItem('clientName', action.payload[0]);
+      localStorage.setItem('token', action.payload[1]);
+      return {
+        ...state,
+        clientName: action.payload.clientName,
+        loading: false,
+        isAuthenticated: true
       };
     case pizzaMenuActions.PIZZA_REMOVED_FROM_CART:
       return updateOrder(state, action.payload, -1);
