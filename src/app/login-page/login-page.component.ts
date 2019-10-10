@@ -14,8 +14,8 @@ import {Router} from '@angular/router';
 export class LoginPageComponent implements OnInit {
   isLoading = false;
   hasError: string;
-  userLoggedIn = false;
   username: string;
+  userLoggedIn: boolean = false;
   constructor(
     private router: Router,
     private store: Store<{pizzaMenu: {cartItems: string[]}}>,
@@ -31,7 +31,7 @@ export class LoginPageComponent implements OnInit {
     this.loginService
       .login(clientName, password)
       .subscribe(res => {
-        this.isLoading = false; this.userLoggedIn = true;
+        this.isLoading = false;
         this.username = res[0].clientName;
         this.store.dispatch(new pizzaMenuActions.PostLoginSuccess(res[0]));
         this.userLoggedIn = true;

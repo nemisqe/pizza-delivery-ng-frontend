@@ -15,6 +15,8 @@ import {StoreModule} from '@ngrx/store';
 import {pizzaMenuReducer} from './home-page/menu-list/store/menu-list.reducer';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LoadingSpinnerComponent} from './loading-spinner/loading-spinner.component';
+import {LogoutComponent} from './logout/logout.component';
+import {LoginPageService} from './login-page/login-page.service';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import {LoadingSpinnerComponent} from './loading-spinner/loading-spinner.compone
     LoginPageComponent,
     HomePageComponent,
     LoadingSpinnerComponent,
+    LogoutComponent,
     RegistrationPageComponent
   ],
   imports: [
@@ -36,7 +39,7 @@ import {LoadingSpinnerComponent} from './loading-spinner/loading-spinner.compone
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [LoginPageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
